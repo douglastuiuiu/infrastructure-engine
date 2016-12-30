@@ -1,0 +1,85 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0 - snapshot",
+        "title": "Infrastructure Engine",
+        "description": "API para integração com serviços de infraestrutura.  Esse micro-serviço é responsável pelo suporte aos serviços de outras aplicações",
+        "contact": {
+            "name": "Douglas Gomes",
+            "email": "douglasog87@gmail.com"
+        }
+    },
+    "basePath": "/api/",
+    "host": "localhost:8090",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/v1/infrastructureEngine/getDateTime": {
+            "get": {
+                "description": "Obtém a hora atual dos servidores UTC configurados",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "errorModel": {
+            "description": "erro genérico padrão",
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
